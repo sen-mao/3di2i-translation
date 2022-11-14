@@ -1,8 +1,8 @@
-# StyleNeRF: A Style-based 3D-Aware Generator for High-resolution Image Synthesis</sub>
+# 3DI2I: 3D-Aware Multi-Class Image-to-Image Translation with NeRFs</sub>
 
 ![Random Sample](./docs/random_sample.jpg)
 
-**StyleNeRF: A Style-based 3D-Aware Generator for High-resolution Image Synthesis**<br>
+**3DI2I: 3D-Aware Multi-Class Image-to-Image Translation with NeRFs**<br>
 Jiatao Gu, Lingjie Liu, Peng Wang, Christian Theobalt<br>
 ### [Project Page](http://jiataogu.me/style_nerf) | [Video](http://jiataogu.me/style_nerf) | [Demo](https://huggingface.co/spaces/facebook/StyleNeRF) | [Paper](https://arxiv.org/abs/2110.08985) | [Data](#dataset)<br>
 
