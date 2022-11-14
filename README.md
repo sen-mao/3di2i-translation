@@ -1,6 +1,6 @@
 # 3DI2I: 3D-Aware Multi-Class Image-to-Image Translation with NeRFs</sub>
 
-![Random Sample](./docs/random_sample.jpg)
+![Random Sample](./docs/random_sample.pdf)
 
 **3DI2I: 3D-Aware Multi-Class Image-to-Image Translation with NeRFs**<br>
 Jiatao Gu, Lingjie Liu, Peng Wang, Christian Theobalt<br>
