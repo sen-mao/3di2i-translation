@@ -1,0 +1,53 @@
+defaults:
+  - _self_
+  - model: stylenerf_afhq_step2
+  - spec: paper256
+
+# general options
+outdir: './output'
+dry_run: False
+debug: False
+resume_run: ~
+
+snap: 1000    # Snapshot interval [default: 50 ticks]
+imgsnap: 500
+metrics: [ "fid50k_full" ]
+seed: 2
+num_fp16_res: 4
+auto: False
+
+# dataset
+data: '/opt/data/private/senmao/datasets/afhq3c_labels.zip'
+resolution: ~
+cond: True
+label_dim: ~
+subset: ~   # Train with only N images: <int>, default = all
+mirror: False
+
+# discriminator augmentation
+aug: noaug
+p: ~
+target: ~
+augpipe: ~
+
+# transfer learning
+resume: ~
+freezed: 1000
+
+# vgg pretrained model
+vgg: '/opt/data/private/senmao/StyleNeRF-2MappingNetwork-CCPL/pretrained/vgg_normalised.pth'
+
+# performance options
+fp32: False
+nhwc: False
+allow_tf32: False
+nobench: False
+workers: 3
+
+launcher: "spawn"
+partition: ~
+comment: ~
+gpus: ~    # Number of GPUs to use [default: 1]
+port: ~
+nodes: ~
+timeout: ~
