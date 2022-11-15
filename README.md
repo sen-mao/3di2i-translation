@@ -40,6 +40,14 @@ python apps/dataset_labels.py --out=~/data/afhq/train/dataset.json --source=~/da
 python apps/dataset_labels.py --out=~/data/celeba_hq/train/dataset.json --source=~/data/celeba_hq/train/
 ```
 
+2.2. create dataset with lables (dataset.json) for conditional stylenerf.
+```
+python apps/dataset_tool.py --source=~/data/afhq/train/ --dest=~/datasets/afhq3c_labels.zip
+```
+```
+python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/celeba2c_labels.zip
+```
+
 ## Pretrained Checkpoints
 You can download the pre-trained checkpoints (used in our paper) and some recent variants trained with current codebase as follows:
 | Dataset   | Resolution | #Params(M) | Config |                           Download                           |
