@@ -18,12 +18,11 @@ For additional python libraries, please install by:
 pip install -r requirements.txt
 ```
 
-Please refer to https://github.com/NVlabs/stylegan2-ada-pytorch for additional software/hardware requirements.
-
-## Dataset
-We follow the same dataset format as [StyleGAN2-ADA](https://github.com/NVlabs/stylegan2-ada-pytorch#preparing-datasets) supported, which can be either an image folder, or a zipped file.
-
-You can also download the zipped datasets from [Hugging Face 🤗](https://huggingface.co/datasets/thomagram/StyleNeRF_Datasets).
+## Datasets
+**dataset for unconditional stylenerf:**
+```
+python apps/dataset_tool.py --source=/opt/data/private/senmao/data/afhq/train/ --dest=/opt/data/private/senmao/datasets/afhq.zip
+```
 
 ## Pretrained Checkpoints
 You can download the pre-trained checkpoints (used in our paper) and some recent variants trained with current codebase as follows:
