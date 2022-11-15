@@ -1,6 +1,6 @@
 # 3DI2I: 3D-Aware Multi-Class Image-to-Image Translation with NeRFs</sub>
 
-![Random Sample](./docs/random_sample.pdf)
+![Random Sample](./docs/random_sample.png)
 
 **3DI2I: 3D-Aware Multi-Class Image-to-Image Translation with NeRFs**<br>
 
