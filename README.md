@@ -19,7 +19,8 @@ pip install -r requirements.txt
 ```
 
 ## Datasets
-**dataset for unconditional stylenerf:**
+Preparing datasets following [stylegan2-ada-pytorch](https://github.com/NVlabs/stylegan2-ada-pytorch#preparing-datasets) for 3D-aware I2I translation.
+**1. dataset for unconditional stylenerf:**
 ```
 python apps/dataset_tool.py --source=/opt/data/private/senmao/data/afhq/train/ --dest=/opt/data/private/senmao/datasets/afhq.zip
 ```
