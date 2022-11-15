@@ -40,7 +40,7 @@ python apps/dataset_labels.py --out=~/data/afhq/train/dataset.json --source=~/da
 python apps/dataset_labels.py --out=~/data/celeba_hq/train/dataset.json --source=~/data/celeba_hq/train/
 ```
 
-2.2. create dataset with lables (dataset.json) for conditional stylenerf.
+2.2. create dataset with lables (dataset.json) for afhq and celeba-hq.
 ```
 python apps/dataset_tool.py --source=~/data/afhq/train/ --dest=~/datasets/afhq3c_labels.zip
 ```
