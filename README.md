@@ -26,6 +26,13 @@ Preparing datasets following [stylegan2-ada-pytorch](https://github.com/NVlabs/s
 python apps/dataset_tool.py --source=~/data/afhq/train/ --dest=~/datasets/afhq.zip
 ```
 
+**2. dataset for conditional stylenerf**
+
+2.1. create labels for dataset (e.g. afhq). 
+```
+python apps/dataset_labels.py --out=~/data/afhq/train/dataset.json --source=~/data/afhq/train/
+```
+
 ## Pretrained Checkpoints
 You can download the pre-trained checkpoints (used in our paper) and some recent variants trained with current codebase as follows:
 | Dataset   | Resolution | #Params(M) | Config |                           Download                           |
