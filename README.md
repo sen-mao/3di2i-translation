@@ -24,6 +24,8 @@ Preparing datasets following [stylegan2-ada-pytorch](https://github.com/NVlabs/s
 **1. dataset for unconditional stylenerf:**
 ```
 python apps/dataset_tool.py --source=~/data/afhq/train/ --dest=~/datasets/afhq.zip
+```
+```
 python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/celeba_hq.zip
 ```
 
@@ -33,6 +35,8 @@ python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/c
 2.1. create labels for afhq and celeba-hq datasets. 
 ```
 python apps/dataset_labels.py --out=~/data/afhq/train/dataset.json --source=~/data/afhq/train/
+```
+```
 python apps/dataset_labels.py --out=~/data/celeba_hq/train/dataset.json --source=~/data/celeba_hq/train/
 ```
 
