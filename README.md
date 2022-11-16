@@ -23,10 +23,10 @@ Preparing datasets following [stylegan2-ada-pytorch](https://github.com/NVlabs/s
 
 **1. dataset for unconditional stylenerf:**
 ```
-python apps/dataset_tool.py --source=~/data/afhq/train/ --dest=~/datasets/afhq.zip
+python apps/dataset_tool.py --source=~/data/afhq/train/ --dest=~/datasets/afhq.zip --width 256 --height 256
 ```
 ```
-python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/celeba_hq.zip
+python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/celeba_hq.zip --width 256 --height 256
 ```
 
 
@@ -42,10 +42,10 @@ python apps/dataset_labels.py --out=~/data/celeba_hq/train/dataset.json --source
 
 2.2. create dataset with lables (dataset.json) for afhq and celeba-hq.
 ```
-python apps/dataset_tool.py --source=~/data/afhq/train/ --dest=~/datasets/afhq3c_labels.zip
+python apps/dataset_tool.py --source=~/data/afhq/train/ --dest=~/datasets/afhq3c_labels.zip --width 256 --height 256
 ```
 ```
-python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/celeba2c_labels.zip
+python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/celeba2c_labels.zip --width 256 --height 256
 ```
 
 ## Training
