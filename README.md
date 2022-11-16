@@ -8,9 +8,9 @@ Abstract: *Recent advances in 3D-aware generative models (3D-aware GANs) combine
 
 ## Requirements
 The codebase is tested on 
-* Python 3.7
-* PyTorch 1.7.1
-* 8 Nvidia GPU (Tesla V100 32GB) with CUDA version 11.0
+* Python 3.8
+* PyTorch 1.7.0
+* 2× Quadro RTX 3090 GPUs (24 GB VRAM) with CUDA version 11.7
 
 For additional python libraries, please install by:
 
@@ -18,72 +18,90 @@ For additional python libraries, please install by:
 pip install -r requirements.txt
 ```
 
-Please refer to https://github.com/NVlabs/stylegan2-ada-pytorch for additional software/hardware requirements.
+## Datasets
+Preparing datasets following [stylegan2-ada-pytorch](https://github.com/NVlabs/stylegan2-ada-pytorch#preparing-datasets) for 3D-aware I2I translation.
 
-## Dataset
-We follow the same dataset format as [StyleGAN2-ADA](https://github.com/NVlabs/stylegan2-ada-pytorch#preparing-datasets) supported, which can be either an image folder, or a zipped file.
-
-You can also download the zipped datasets from [Hugging Face 🤗](https://huggingface.co/datasets/thomagram/StyleNeRF_Datasets).
-
-## Pretrained Checkpoints
-You can download the pre-trained checkpoints (used in our paper) and some recent variants trained with current codebase as follows:
-| Dataset   | Resolution | #Params(M) | Config |                           Download                           |
-| :-------- | :--------: | :--------: | :----: | :----------------------------------------------------------: |
-| FFHQ      |    256     | 128        | Default |  [Hugging Face 🤗](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_256.pkl) |
-| FFHQ      |    512     | 148        | Default |  [Hugging Face 🤗](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_512.pkl) |
-| FFHQ      |    1024    | 184        | Default |  [Hugging Face 🤗](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_1024.pkl) |
-
-（I am slowly adding more checkpoints. Thanks for your very kind patience!)
-
-
-## Train a new StyleNeRF model
-```bash
-python run_train.py outdir=${OUTDIR} data=${DATASET} spec=paper512 model=stylenerf_ffhq
+**1. dataset for unconditional stylenerf:**
 ```
-It will automatically detect all usable GPUs.
-
-Please check configuration files at ```conf/model``` and ```conf/spec```. You can always add your own model config. More details on how to use hydra configuration please follow https://hydra.cc/docs/intro/.
-
-## Render the pretrained model
-```bash
-python generate.py --outdir=${OUTDIR} --trunc=0.7 --seeds=${SEEDS} --network=${CHECKPOINT_PATH} --render-program="rotation_camera"
+python apps/dataset_tool.py --source=~/data/afhq/train/ --dest=~/datasets/afhq.zip --width 256 --height 256
 ```
-It supports different rotation trajectories for rendering new videos.
-
-## Run a demo page
-```bash
-python web_demo.py 21111
 ```
-It will in default run a Gradio-powered demo on https://localhost:21111
-
-[NEW]
-The demo is also integrated into [Huggingface Spaces 🤗](https://huggingface.co/spaces) using [Gradio](https://github.com/gradio-app/gradio). Try out the Web Demo: [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/facebook/StyleNeRF)
-
-![Web demo](./docs/web_demo.gif)
-## Run a GUI visualizer
-```bash
-python visualizer.py
-```
-An interative application will show up for users to play with.
-![GUI demo](./docs/gui_demo.gif)
-## Citation
-
-```
-@inproceedings{
-    gu2022stylenerf,
-    title={StyleNeRF: A Style-based 3D Aware Generator for High-resolution Image Synthesis},
-    author={Jiatao Gu and Lingjie Liu and Peng Wang and Christian Theobalt},
-    booktitle={International Conference on Learning Representations},
-    year={2022},
-    url={https://openreview.net/forum?id=iUuzzTMUw9K}
-}
+python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/celeba_hq.zip --width 256 --height 256
 ```
 
 
-## License
+**2. dataset for conditional stylenerf**
 
-Copyright &copy; Facebook, Inc. All Rights Reserved.
+2.1. create labels for afhq and celeba-hq datasets. 
+```
+python apps/dataset_labels.py --out=~/data/afhq/train/dataset.json --source=~/data/afhq/train/
+```
+```
+python apps/dataset_labels.py --out=~/data/celeba_hq/train/dataset.json --source=~/data/celeba_hq/train/
+```
 
-The majority of StyleNeRF is licensed under [CC-BY-NC](https://creativecommons.org/licenses/by-nc/4.0/), however, portions of this project are available under a separate license terms: all codes used or modified from [stylegan2-ada-pytorch](https://github.com/NVlabs/stylegan2-ada-pytorch) is under the [Nvidia Source Code License](https://nvlabs.github.io/stylegan2-ada-pytorch/license.html).
+2.2. create dataset with lables (dataset.json) for afhq and celeba-hq.
+```
+python apps/dataset_tool.py --source=~/data/afhq/train/ --dest=~/datasets/afhq3c_labels.zip --width 256 --height 256
+```
+```
+python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/celeba2c_labels.zip --width 256 --height 256
+```
+
+## Training
+**1. unconditional 3D-aware generative model (using [StyleNeRF](https://github.com/facebookresearch/StyleNeRF) with stylenerf_afhq.yaml).**
+
+cd ${CodePath}/StyleNeRF/
+
+finetune using mixed afhq(cat, dog and wild) datasets and ffhq_256.pkl pretrained model (unconditional stylenerf).
+```
+python run_train.py outdir=./output data=~/datasets/afhq.zip spec=paper256 model=stylenerf_afhq  resume='ffhq256' cond=False
+```
+finetune using mixed celeba-hq(female and male) datasets and ffhq_256.pkl pretrained model (unconditional stylenerf).
+```
+python run_train.py outdir=./output data=~/datasets/celeba_hq.zip spec=paper256 model=stylenerf_afhq  resume='ffhq256' cond=False
+```
+
+**2. conditional 3D-aware generative model**
+
+```
+python run_train.py outdir=./output data=~/datasets/afhq3c_labels.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/afhq_256.pkl cond=True gpus=2
+```
+```
+python run_train.py outdir=./output data=~/datasets/celeba2c_labels.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/celeba_256_0.2dloss.pkl cond=True gpus=2
+```
+
+the trained model save as afhqlabels_256.pkl and celebalabels_256.pkl.
+
+**3. 3D-aware I2I translation**
+
+```
+python run_train_step2.py outdir=./output data=~/datasets/afhq3c_labels.zip spec=paper256 model=stylenerf_afhq_step2 resume=./pretrained/afhqlabels_256.pkl cond=True label_dim=3 gpus=2
+```
+```
+python run_train_step2.py outdir=./output data=~/datasets/celeba2c_labels.zip spec=paper256 model=stylenerf_afhq_step2 resume=./pretrained/celebalabels_256.pkl cond=True label_dim=2 gpus=2
+```
+
+the trained model save as afhqadaptor_256.pkl and celebaadaptor_256.pkl.
+
+## Rendering 3D-aware I2I translation results using the pretrained model
+
+Example of 3D-aware I2I translation of dog into cat and wild on AFHQ $256^2$
+```
+python generate_3d23dt.py --network="{'stylenerf-3d23d': './pretrained/afhqlabels_256.pkl', 'adapted-layers': './pretrained/afhqadaptor_256.pkl'}" \
+                          --class_label="[[1, 0, 0], [0, 1, 0], [0, 0, 1]]" --seed_nerf 1 --seed 1 --batch_size 16 --save_3dvideo 0 --batch_idx 15 \
+                          --save_3dframes 1 --save_sgl_3dvideo 1 --save_sglframes 1 --class 1
+```
+
+Example of 3D-aware I2I translation of male into female on Celeba-HQ $256^2$
+```
+python generate_3d23dt.py  --network="{'stylenerf-3d23d': './pretrained/celebalabels_256.pkl', 'adapted-layers': './pretrained/celebaadaptor_256.pkl'}" \
+                           --class_label="[[1, 0], [0, 1]]" --seed_nerf 2 --seed 2 --batch_size 13 --save_3dvideo 0 --batch_idx 12 \
+                           --save_3dframes 1 --save_sgl_3dvideo 1 --save_sglframes 1 --class 1
+```
+
+
+
+
 
 
