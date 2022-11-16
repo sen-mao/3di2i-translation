@@ -57,7 +57,7 @@ python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/c
 
 
 
-## Render the pretrained model
+## Render 3D-aware I2I translation results using the pretrained model
 ```bash
 python generate.py --outdir=${OUTDIR} --trunc=0.7 --seeds=${SEEDS} --network=${CHECKPOINT_PATH} --render-program="rotation_camera"
 ```
