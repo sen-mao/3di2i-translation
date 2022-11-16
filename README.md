@@ -48,15 +48,12 @@ python apps/dataset_tool.py --source=~/data/afhq/train/ --dest=~/datasets/afhq3c
 python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/celeba2c_labels.zip
 ```
 
-## Pretrained Checkpoints
-You can download the pre-trained checkpoints (used in our paper) and some recent variants trained with current codebase as follows:
-| Dataset   | Resolution | #Params(M) | Config |                           Download                           |
-| :-------- | :--------: | :--------: | :----: | :----------------------------------------------------------: |
-| FFHQ      |    256     | 128        | Default |  [Hugging Face 🤗](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_256.pkl) |
-| FFHQ      |    512     | 148        | Default |  [Hugging Face 🤗](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_512.pkl) |
-| FFHQ      |    1024    | 184        | Default |  [Hugging Face 🤗](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_1024.pkl) |
+## Training
+**1. unconditional 3D-aware generative model**
 
-（I am slowly adding more checkpoints. Thanks for your very kind patience!)
+**2. conditional 3D-aware generative model**
+
+**3. 3D-aware I2I translation3D-aware I2I translation**
 
 
 ## Train a new StyleNeRF model
