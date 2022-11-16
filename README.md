@@ -62,6 +62,13 @@ python run_train.py outdir=./output data=~/datasets/celeba_hq.zip spec=paper256 
 
 **2. conditional 3D-aware generative model**
 
+```
+python run_train.py outdir=./output data=~/datasets/afhq3c_labels.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/afhq_256.pkl cond=True gpus=2
+```
+```
+python run_train.py outdir=./output data=~/datasets/celeba2c_labels.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/celeba_256_0.2dloss.pkl cond=True gpus=2
+```
+
 **3. 3D-aware I2I translation**
 
 
