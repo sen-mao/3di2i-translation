@@ -83,10 +83,12 @@ python run_train_step2.py outdir=./output data=~/datasets/celeba2c_labels.zip sp
 the trained model save as afhqadaptor_256.pkl and celebaadaptor_256.pkl.
 
 ## Rendering 3D-aware I2I translation results using the pretrained model
-```bash
-python generate.py --outdir=${OUTDIR} --trunc=0.7 --seeds=${SEEDS} --network=${CHECKPOINT_PATH} --render-program="rotation_camera"
 ```
-It supports different rotation trajectories for rendering new videos.
+python generate_3d23dt.py --network="{'stylenerf-3d23d': './pretrained/afhqlabels_256.pkl', 'adapted-layers': './pretrained/afhqadaptor_256.pkl'}" --class_label="[[1, 0, 0], [0, 1, 0], [0, 0, 1]]" \
+                           --seed_nerf 1 --seed 1 --batch_size 16 --save_3dvideo 0 --batch_idx 15 --save_3dframes 1 --save_sgl_3dvideo 1 --save_sglframes 1 --class 0
+
+```
+
 
 
 
