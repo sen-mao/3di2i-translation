@@ -56,13 +56,6 @@ python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/c
 **3. 3D-aware I2I translation**
 
 
-## Train a new StyleNeRF model
-```bash
-python run_train.py outdir=${OUTDIR} data=${DATASET} spec=paper512 model=stylenerf_ffhq
-```
-It will automatically detect all usable GPUs.
-
-Please check configuration files at ```conf/model``` and ```conf/spec```. You can always add your own model config. More details on how to use hydra configuration please follow https://hydra.cc/docs/intro/.
 
 ## Render the pretrained model
 ```bash
