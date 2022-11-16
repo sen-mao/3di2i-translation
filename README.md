@@ -53,14 +53,16 @@ python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/c
 
 cd ${CodePath}/StyleNeRF/
 
-finetune using mixed afhq(cat, dog and wild) datasets and ffhq_256.pkl pretrained model (unconditional stylenerf).
+finetune using mixed afhq(cat, dog and wild) datasets and [ffhq_256.pkl](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_256.pkl) pretrained model (unconditional stylenerf).
 ```
-python run_train.py outdir=./output data=~/datasets/afhq.zip spec=paper256 model=stylenerf_afhq  resume='ffhq256' cond=False
+python run_train.py outdir=./output data=~/datasets/afhq.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/ffhq_256.pkl cond=False
 ```
-finetune using mixed celeba-hq(female and male) datasets and ffhq_256.pkl pretrained model (unconditional stylenerf).
+finetune using mixed celeba-hq(female and male) datasets and [ffhq_256.pkl](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_256.pkl) pretrained model (unconditional stylenerf).
 ```
-python run_train.py outdir=./output data=~/datasets/celeba_hq.zip spec=paper256 model=stylenerf_afhq  resume='ffhq256' cond=False
+python run_train.py outdir=./output data=~/datasets/celeba_hq.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/ffhq_256.pkl cond=False
 ```
+
+the trained model save as afhq_256.pkl and celebahq_256.pkl.
 
 **2. conditional 3D-aware generative model**
 
@@ -68,7 +70,7 @@ python run_train.py outdir=./output data=~/datasets/celeba_hq.zip spec=paper256 
 python run_train.py outdir=./output data=~/datasets/afhq3c_labels.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/afhq_256.pkl cond=True gpus=2
 ```
 ```
-python run_train.py outdir=./output data=~/datasets/celeba2c_labels.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/celeba_256_0.2dloss.pkl cond=True gpus=2
+python run_train.py outdir=./output data=~/datasets/celeba2c_labels.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/celebahq_256.pkl cond=True gpus=2
 ```
 
 the trained model save as afhqlabels_256.pkl and celebalabels_256.pkl.
@@ -100,7 +102,16 @@ python generate_3d23dt.py  --network="{'stylenerf-3d23d': './pretrained/celebala
                            --save_3dframes 1 --save_sgl_3dvideo 1 --save_sglframes 1 --class 1
 ```
 
+## Metrics
 
+**calculate fid and lpips of 3D-aware I2I translation model.**
+
+```
+python cond_metrics.py --network ./pretrained/afhqlabels_256.pkl --network_trans ./pretrained/afhqadaptor_256.pkl --data ~/data/afhq/train/ --metrics fid50k_trans --gpus 1
+```
+```
+python cond_metrics.py --network ./pretrained/celebalabels_256.pkl --network_trans ./pretrained/celebaadaptor_256.pkl --data ~/data/celeba_hq/train/ --metrics fid50k_trans --gpus 1
+```
 
 
 
