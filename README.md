@@ -53,7 +53,7 @@ python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/c
 
 **2. conditional 3D-aware generative model**
 
-**3. 3D-aware I2I translation3D-aware I2I translation**
+**3. 3D-aware I2I translation**
 
 
 ## Train a new StyleNeRF model
