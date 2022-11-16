@@ -16,7 +16,7 @@ environment or python libraries:
 
 ```
 conda env create -f environment.yml
-or
+# or
 pip install -r requirements.txt
 ```
 
