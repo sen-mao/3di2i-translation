@@ -12,7 +12,7 @@ The codebase is tested on
 * PyTorch 1.7.0
 * 2× Quadro RTX 3090 GPUs (24 GB VRAM) with CUDA version 11.7
 
-For additional python libraries, please install by:
+Python libraries:
 
 ```
 pip install -r requirements.txt
