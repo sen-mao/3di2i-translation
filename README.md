@@ -50,6 +50,14 @@ python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/c
 
 ## Training
 **1. unconditional 3D-aware generative model**
+finetune using mixed afhq(cat, dog and wild) datasets and ffhq_256.pkl pretrained model (unconditional stylenerf).
+```
+python run_train.py outdir=./output data=~/datasets/afhq.zip spec=paper256 model=stylenerf_afhq  resume='ffhq256' cond=False
+```
+finetune using mixed celeba-hq(female and male) datasets and ffhq_256.pkl pretrained model (unconditional stylenerf).
+```
+python run_train.py outdir=./output data=~/datasets/celeba_hq.zip spec=paper256 model=stylenerf_afhq  resume='ffhq256' cond=False
+```
 
 **2. conditional 3D-aware generative model**
 
