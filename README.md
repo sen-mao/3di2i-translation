@@ -93,15 +93,15 @@ the trained model save as afhqadaptor_256.pkl and celebaadaptor_256.pkl.
 Example of 3D-aware I2I translation of dog into cat and wild on AFHQ $256^2$
 ```
 python generate_3d23dt.py --network="{'stylenerf-3d23d': './pretrained/afhqlabels_256.pkl', 'adapted-layers': './pretrained/afhqadaptor_256.pkl'}" \
-                          --class_label="[[1, 0, 0], [0, 1, 0], [0, 0, 1]]" --seed_nerf 1 --seed 1 --batch_size 16 --save_3dvideo 0 --batch_idx 15 \
-                          --save_3dframes 1 --save_sgl_3dvideo 1 --save_sglframes 1 --class 1
+                          --class_label="[[1, 0, 0], [0, 1, 0], [0, 0, 1]]" --class_name="['cat', 'dog', 'wild']" --seed_nerf 1 --seed 1 --batch_size 16 \
+                          --save_3dvideo 0 --batch_idx 15 --save_3dframes 1 --save_sgl_3dvideo 1 --save_sglframes 1 --class 1
 ```
 
 Example of 3D-aware I2I translation of male into female on Celeba-HQ $256^2$
 ```
 python generate_3d23dt.py  --network="{'stylenerf-3d23d': './pretrained/celebalabels_256.pkl', 'adapted-layers': './pretrained/celebaadaptor_256.pkl'}" \
-                           --class_label="[[1, 0], [0, 1]]" --seed_nerf 2 --seed 2 --batch_size 13 --save_3dvideo 0 --batch_idx 12 \
-                           --save_3dframes 1 --save_sgl_3dvideo 1 --save_sglframes 1 --class 1
+                           --class_label="[[1, 0], [0, 1]]" --class_name="['female', 'male']" --seed_nerf 2 --seed 2 --batch_size 13 \ 
+                           --save_3dvideo 0 --batch_idx 12 --save_3dframes 1 --save_sgl_3dvideo 1 --save_sglframes 1 --class 1
 ```
 
 ## Metrics
