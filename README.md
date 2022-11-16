@@ -104,7 +104,7 @@ python generate_3d23dt.py  --network="{'stylenerf-3d23d': './pretrained/celebala
 
 ## Metrics
 
-# calculate translated fid and lpips of 3D-aware I2I translation model.
+**calculate translated fid and lpips of 3D-aware I2I translation model.**
 
 ```
 python cond_metrics.py --network ./pretrained/afhqlabels_256.pkl --network_trans ./pretrained/afhqadaptor_256.pkl --data ~/data/afhq/train/ --metrics fid50k_trans --gpus 1
