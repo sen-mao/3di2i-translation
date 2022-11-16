@@ -69,9 +69,18 @@ python run_train.py outdir=./output data=~/datasets/afhq3c_labels.zip spec=paper
 python run_train.py outdir=./output data=~/datasets/celeba2c_labels.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/celeba_256_0.2dloss.pkl cond=True gpus=2
 ```
 
+the trained model save as afhqlabels_256.pkl and celebalabels_256.pkl.
+
 **3. 3D-aware I2I translation**
 
+```
+python run_train_step2.py outdir=./output data=~/datasets/afhq3c_labels.zip spec=paper256 model=stylenerf_afhq_step2 resume=./pretrained/afhqlabels_256.pkl cond=True label_dim=3 gpus=2
+```
+```
+python run_train_step2.py outdir=./output data=~/datasets/celeba2c_labels.zip spec=paper256 model=stylenerf_afhq_step2 resume=./pretrained/celebalabels_256.pkl cond=True label_dim=2 gpus=2
+```
 
+the trained model save as afhqadaptor_256.pkl and celebaadaptor_256.pkl.
 
 ## Rendering 3D-aware I2I translation results using the pretrained model
 ```bash
