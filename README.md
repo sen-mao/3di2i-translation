@@ -70,40 +70,7 @@ python generate.py --outdir=${OUTDIR} --trunc=0.7 --seeds=${SEEDS} --network=${C
 ```
 It supports different rotation trajectories for rendering new videos.
 
-## Run a demo page
-```bash
-python web_demo.py 21111
-```
-It will in default run a Gradio-powered demo on https://localhost:21111
-
-[NEW]
-The demo is also integrated into [Huggingface Spaces 🤗](https://huggingface.co/spaces) using [Gradio](https://github.com/gradio-app/gradio). Try out the Web Demo: [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/facebook/StyleNeRF)
-
-![Web demo](./docs/web_demo.gif)
-## Run a GUI visualizer
-```bash
-python visualizer.py
-```
-An interative application will show up for users to play with.
-![GUI demo](./docs/gui_demo.gif)
-## Citation
-
-```
-@inproceedings{
-    gu2022stylenerf,
-    title={StyleNeRF: A Style-based 3D Aware Generator for High-resolution Image Synthesis},
-    author={Jiatao Gu and Lingjie Liu and Peng Wang and Christian Theobalt},
-    booktitle={International Conference on Learning Representations},
-    year={2022},
-    url={https://openreview.net/forum?id=iUuzzTMUw9K}
-}
-```
 
 
-## License
-
-Copyright &copy; Facebook, Inc. All Rights Reserved.
-
-The majority of StyleNeRF is licensed under [CC-BY-NC](https://creativecommons.org/licenses/by-nc/4.0/), however, portions of this project are available under a separate license terms: all codes used or modified from [stylegan2-ada-pytorch](https://github.com/NVlabs/stylegan2-ada-pytorch) is under the [Nvidia Source Code License](https://nvlabs.github.io/stylegan2-ada-pytorch/license.html).
 
 
