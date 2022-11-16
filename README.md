@@ -53,11 +53,11 @@ python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/c
 
 cd ${CodePath}/StyleNeRF/
 
-finetune using mixed afhq(cat, dog and wild) datasets and ffhq_256.pkl pretrained model (unconditional stylenerf).
+finetune using mixed afhq(cat, dog and wild) datasets and [ffhq_256.pkl](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_256.pkl) pretrained model (unconditional stylenerf).
 ```
 python run_train.py outdir=./output data=~/datasets/afhq.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/ffhq_256.pkl cond=False
 ```
-finetune using mixed celeba-hq(female and male) datasets and ffhq_256.pkl pretrained model (unconditional stylenerf).
+finetune using mixed celeba-hq(female and male) datasets and [ffhq_256.pkl](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_256.pkl) pretrained model (unconditional stylenerf).
 ```
 python run_train.py outdir=./output data=~/datasets/celeba_hq.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/ffhq_256.pkl cond=False
 ```
