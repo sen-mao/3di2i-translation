@@ -66,10 +66,10 @@ nohup python -u run_train.py outdir=./output data=~/datasets/celeba_hq.zip spec=
 python run_train.py outdir=./output data=~/datasets/afhq3c_labels.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/afhq_256.pkl cond=True gpus=2
 ```
 ```
-python run_train.py outdir=./output data=~/datasets/celeba2c_labels.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/celebahq_256.pkl cond=True gpus=2
+nohup python -u  run_train.py outdir=./output data=~/datasets/celeba2c_labels.zip spec=paper256 model=stylenerf_afhq  resume=/opt/data/private/senmao/StyleNeRF/pretrained/celebahq_256_mirror.pkl cond=True mirror=True gpus=2 > out_celeba_256.log 2>&1 &
 ```
 
-the trained model save as afhqlabels_256.pkl and celebalabels_256.pkl.
+the trained model save as afhqlabels_256.pkl and celebalabels_256_mirror.pkl in /StyleNeRF-2MappingNetwork-CCPL/outputs/2022-11-17/16-39-17/.
 
 **3. 3D-aware I2I translation**
 
