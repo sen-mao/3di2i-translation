@@ -55,7 +55,7 @@ finetune using mixed afhq(cat, dog and wild) datasets and [ffhq_256.pkl](https:/
 ```
 python run_train.py outdir=./output data=~/datasets/afhq.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/[ffhq_256.pkl cond=False
 ```
-finetune using mixed celeba-hq(female and male) datasets and [ffhq_256.pkl](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_256.pkl) pretrained model (unconditional stylenerf), which product celebahq_256_mirror.pkl in StyleNeRF/outputs/2022-11-16/20-23-14/.
+finetune using mixed celeba-hq(female and male) datasets and [ffhq_256.pkl](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_256.pkl) pretrained model (unconditional stylenerf), which product celebahq_256_mirror.pkl in StyleNeRF/outputs/2022-11-16/20-23-14/ with **fid=6.567**.
 ```
 nohup python -u run_train.py outdir=./output data=~/datasets/celeba_hq.zip spec=paper256 model=stylenerf_afhq  resume=/opt/data/private/senmao/StyleNeRF/pretrained/ffhq_256.pkl cond=False mirror=True > out_celeba_256.log 2>&1 &
 ```
@@ -69,7 +69,7 @@ python run_train.py outdir=./output data=~/datasets/afhq3c_labels.zip spec=paper
 nohup python -u  run_train.py outdir=./output data=~/datasets/celeba2c_labels.zip spec=paper256 model=stylenerf_afhq  resume=/opt/data/private/senmao/StyleNeRF/pretrained/celebahq_256_mirror.pkl cond=True mirror=True gpus=2 > out_celeba_256.log 2>&1 &
 ```
 
-the trained model save as afhqlabels_256.pkl and celebalabels_256_mirror.pkl in /StyleNeRF-2MappingNetwork-CCPL/outputs/2022-11-17/16-39-17/ with **fid=6.567**.
+the trained model save as afhqlabels_256.pkl and celebalabels_256_mirror.pkl in /StyleNeRF-2MappingNetwork-CCPL/outputs/2022-11-17/16-39-17/.
 
 **3. 3D-aware I2I translation**
 
