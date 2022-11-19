@@ -125,7 +125,7 @@ def training_loop(
     # ------------------------------------ #
 
     # # Adapted_net resume pkl
-    # ada_resume_pkl = '/opt/data/private/senmao/StyleNeRF-2MappingNetwork-CCPL/pretrained/adaptedlayers_afhqlabels_256_wostylemix.pkl'
+    # ada_resume_pkl = '/opt/data/private/customer/StyleNeRF-2MappingNetwork-CCPL/pretrained/adaptedlayers_afhqlabels_256_wostylemix.pkl'
     # if (ada_resume_pkl is not None) and (rank == 0):
     #     with dnnlib.util.open_url(ada_resume_pkl) as f:
     #         resume_data = legacy.load_network_pkl(f)
