@@ -82,7 +82,7 @@ def wvideo(img, name, outdir, grid_size):
 @click.option('--batch_idx', help='batch index (seed index), 0~batch_size-1', type=int, required=True, default=29)
 @click.option('--save_sgl_3dvideo', help='if save single 3d video', type=bool, required=True, default=False)
 @click.option('--save_sglframes', help='if save singal 3d frames', type=bool, required=True, default=False)
-@click.option('--outdir', help='Where to save the output images', type=str, required=True, metavar='DIR', default='./results/afhq')
+@click.option('--outdir', help='Where to save the output images', type=str, required=True, metavar='DIR', default='./results_tmp/afhq')
 @click.option('--sample_frames', help='if sample frames', type=bool, required=True, default=False)
 @click.option('--save_fnimg', help='if save fake_nerf_image and D_images', type=bool, required=True, default=False)
 # local images
@@ -226,7 +226,7 @@ def generate_images(
                 wvideo(imgs, f'{class_name[class_idx]}_fs1_sdvideo', outdir, grid_size)
             # save 3d frames
             if save_3dframes:
-                curr_out_dir = os.path.join(outdir, f'seed{seed}_{batch_idx}')
+                curr_out_dir = os.path.join(outdir, f'seed{seed_nerf}_{batch_idx}')
                 os.makedirs(curr_out_dir, exist_ok=True)
                 img_dir = os.path.join(curr_out_dir, f'{class_name[class_idx]}_fs1/step1')
                 os.makedirs(img_dir, exist_ok=True)
