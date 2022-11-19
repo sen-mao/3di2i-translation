@@ -8,8 +8,8 @@ import json
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--out', type=str, default='/opt/data/private/senmao/data/afhq/train/dataset.json')
-    parser.add_argument('--source', type=str, default='/opt/data/private/senmao/data/afhq/train/')
+    parser.add_argument('--out', type=str, default='/opt/data/private/customer/data/afhq/train/dataset.json')
+    parser.add_argument('--source', type=str, default='/opt/data/private/customer/data/afhq/train/')
     parser.add_argument('--min_size', type=int, default=None, help='Minimum image size to not drop it')
 
     args = parser.parse_args()
