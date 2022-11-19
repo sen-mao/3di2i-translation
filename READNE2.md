@@ -53,7 +53,7 @@ python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/c
 
 finetune using mixed afhq(cat, dog and wild) datasets and [ffhq_256.pkl](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_256.pkl) pretrained model (unconditional stylenerf).
 ```
-python run_train.py outdir=./output data=~/datasets/afhq.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/[ffhq_256.pkl cond=False
+python run_train.py outdir=./output data=~/datasets/afhq.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/ffhq_256.pkl cond=False
 ```
 finetune using mixed celeba-hq(female and male) datasets and [ffhq_256.pkl](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_256.pkl) pretrained model (unconditional stylenerf), which product celebahq_256_mirror.pkl in StyleNeRF/outputs/2022-11-16/20-23-14/ with **fid=6.567**.
 ```
