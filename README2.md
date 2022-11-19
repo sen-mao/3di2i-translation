@@ -12,9 +12,11 @@ The codebase is tested on
 * PyTorch 1.7.0
 * 2× Quadro RTX 3090 GPUs (24 GB VRAM) with CUDA version 11.7
 
-For additional python libraries, please install by:
+environment or python libraries:
 
 ```
+conda env create -f environment.yml
+# or
 pip install -r requirements.txt
 ```
 
@@ -51,14 +53,18 @@ python apps/dataset_tool.py --source=~/data/celeba_hq/train/ --dest=~/datasets/c
 ## Training
 **1. unconditional 3D-aware generative model (using [StyleNeRF](https://github.com/facebookresearch/StyleNeRF) with stylenerf_afhq.yaml).**
 
-finetune using mixed afhq(cat, dog and wild) datasets and [ffhq_256.pkl](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_256.pkl) pretrained model (unconditional stylenerf).
+cd ${CodePath}/StyleNeRF/
+
+training StyleNeRF with mixed afhq(cat, dog and wild) dataset.
 ```
-python run_train.py outdir=./output data=~/datasets/afhq.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/ffhq_256.pkl cond=False
+python run_train.py outdir=./output data=~/datasets/afhq.zip spec=paper256 model=stylenerf_afhq cond=False
 ```
-finetune using mixed celeba-hq(female and male) datasets and [ffhq_256.pkl](https://huggingface.co/facebook/stylenerf-ffhq-config-basic/blob/main/ffhq_256.pkl) pretrained model (unconditional stylenerf), which product celebahq_256_mirror.pkl in StyleNeRF/outputs/2022-11-16/20-23-14/ with **fid=6.567**.
+training StyleNeRF with mixed celeba-hq(female and male) dataset.
 ```
-nohup python -u run_train.py outdir=./output data=~/datasets/celeba_hq.zip spec=paper256 model=stylenerf_afhq  resume=/opt/data/private/senmao/StyleNeRF/pretrained/ffhq_256.pkl cond=False mirror=True > out_celeba_256.log 2>&1 &
+python run_train.py outdir=./output data=~/datasets/celeba_hq.zip spec=paper256 model=stylenerf_afhq cond=False
 ```
+
+the trained model save as afhq_256.pkl and celebahq_256.pkl.
 
 **2. conditional 3D-aware generative model**
 
@@ -66,10 +72,10 @@ nohup python -u run_train.py outdir=./output data=~/datasets/celeba_hq.zip spec=
 python run_train.py outdir=./output data=~/datasets/afhq3c_labels.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/afhq_256.pkl cond=True gpus=2
 ```
 ```
-nohup python -u  run_train.py outdir=./output data=~/datasets/celeba2c_labels.zip spec=paper256 model=stylenerf_afhq  resume=/opt/data/private/senmao/StyleNeRF/pretrained/celebahq_256_mirror.pkl cond=True mirror=True gpus=2 > out_celeba_256.log 2>&1 &
+python run_train.py outdir=./output data=~/datasets/celeba2c_labels.zip spec=paper256 model=stylenerf_afhq  resume=./pretrained/celebahq_256.pkl cond=True gpus=2
 ```
 
-the trained model save as afhqlabels_256.pkl and celebalabels_256_mirror.pkl in /StyleNeRF-2MappingNetwork-CCPL/outputs/2022-11-17/16-39-17/ with **mfid=9.710** (fid of female is 7.425, fid male is 11.995).
+the trained model save as afhqlabels_256.pkl and celebalabels_256.pkl.
 
 **3. 3D-aware I2I translation**
 
@@ -87,13 +93,24 @@ the trained model save as afhqadaptor_256.pkl and celebaadaptor_256.pkl.
 Example of 3D-aware I2I translation of dog into cat and wild on AFHQ $256^2$
 ```
 python generate_3d23dt.py --network="{'stylenerf-3d23d': './pretrained/afhqlabels_256.pkl', 'adapted-layers': './pretrained/afhqadaptor_256.pkl'}" \
-                          --class_label="[[1, 0, 0], [0, 1, 0], [0, 0, 1]]" --seed_nerf 1 --seed 1 --batch_size 16 --save_3dvideo 0 --batch_idx 15 \
-                          --save_3dframes 1 --save_sgl_3dvideo 1 --save_sglframes 1 --class 1
+                          --class_label="[[1, 0, 0], [0, 1, 0], [0, 0, 1]]" --class_name="['cat', 'dog', 'wild']" --seed_nerf 1 --seed 1 --batch_size 16 \
+                          --save_3dvideo 0 --batch_idx 15 --save_3dframes 1 --save_sgl_3dvideo 1 --save_sglframes 1 --class 1
 ```
 
 Example of 3D-aware I2I translation of male into female on Celeba-HQ $256^2$
 ```
 python generate_3d23dt.py  --network="{'stylenerf-3d23d': './pretrained/celebalabels_256.pkl', 'adapted-layers': './pretrained/celebaadaptor_256.pkl'}" \
-                           --class_label="[[1, 0], [0, 1]]" --seed_nerf 2 --seed 2 --batch_size 13 --save_3dvideo 0 --batch_idx 12 \
-                           --save_3dframes 1 --save_sgl_3dvideo 1 --save_sglframes 1 --class 1
+                           --class_label="[[1, 0], [0, 1]]" --class_name="['female', 'male']" --seed_nerf 2 --seed 2 --batch_size 13 \ 
+                           --save_3dvideo 0 --batch_idx 12 --save_3dframes 1 --save_sgl_3dvideo 1 --save_sglframes 1 --class 1
+```
+
+## Metrics
+
+**calculate fid and lpips of 3D-aware I2I translation model.**
+
+```
+python cond_metrics.py --network ./pretrained/afhqlabels_256.pkl --network_trans ./pretrained/afhqadaptor_256.pkl --data ~/data/afhq/train/ --metrics fid50k_trans --gpus 1
+```
+```
+python cond_metrics.py --network ./pretrained/celebalabels_256.pkl --network_trans ./pretrained/celebaadaptor_256.pkl --data ~/data/celeba_hq/train/ --metrics fid50k_trans --gpus 1
 ```
