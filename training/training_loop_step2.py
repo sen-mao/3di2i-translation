@@ -1,4 +1,4 @@
-# Copyright (c) Computer school, NKU(Nankai University).
+
 
 import time
 import torch
