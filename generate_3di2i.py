@@ -59,7 +59,7 @@ def wvideo(img, name, outdir, grid_size):
 @click.command()
 @click.pass_context
 @click.option('--network', 'network_pkl', help='Network pickle filename', required=True, type=ast.literal_eval,
-              default="{'stylenerf-3d23d': './pretrained/afhqlabels_256.pkl', 'adapted-layers': './pretrained/adaptedlayers_afhqlabels_256_wostylemix.pkl'}")
+              default="{'step1': './pretrained/afhqlabels_256.pkl', 'step2': './pretrained/adaptedlayers_afhqlabels_256_wostylemix.pkl'}")
 @click.option('--class_label', help='class lable', type=ast.literal_eval, required=True, default='[[1, 0, 0], [0, 1, 0], [0, 0, 1]]')
 @click.option('--class_name', help='class name', type=ast.literal_eval, required=True, default='[\'cat\', \'dog\', \'wild\']')
 @click.option('--class', 'class_idx', type=int, help='Class label (unconditional if not specified)', default=0)
@@ -134,19 +134,19 @@ def generate_images(
     start_time = time.time()
 
     device = torch.device('cuda')
-    if os.path.isdir(network_pkl['stylenerf-3d23d']) and os.path.isdir(network_pkl['adapted-layers']):
-        network_pkl['stylenerf-3d23d'] = sorted(glob.glob(network_pkl['stylenerf-3d23d'] + '/*.pkl'))[-1]
-        network_pkl['adapted-layers'] = sorted(glob.glob(network_pkl['adapted-layers'] + '/*.pkl'))[-1]
+    if os.path.isdir(network_pkl['step1']) and os.path.isdir(network_pkl['step2']):
+        network_pkl['step1'] = sorted(glob.glob(network_pkl['step1'] + '/*.pkl'))[-1]
+        network_pkl['step2'] = sorted(glob.glob(network_pkl['step2'] + '/*.pkl'))[-1]
     print('Loading networks from "%s"...' % network_pkl)
 
     modules = {}
     for network_key in network_pkl:  # load network pkl
         with dnnlib.util.open_url(network_pkl[network_key]) as f:
             network = legacy.load_network_pkl(f)
-            if network_key == 'stylenerf-3d23d':
+            if network_key == 'step1':
                 modules['G'] = network['G_ema'].to(device)
                 modules['D'] = network['D'].to(device)
-            elif network_key == 'adapted-layers':
+            elif network_key == 'step2':
                 modules['Adapted_net'] = network['Adapted_net'].to(device)
 
     os.makedirs(outdir, exist_ok=True)
@@ -314,7 +314,7 @@ def generate_images(
             if save_sgl_3dvideo:
                 for i, s3dv in enumerate(sgl_3dvideo):
                     wvideo(s3dv, f'2{class_name[domain[i]]}', curr_out_dir, grid_size=(1, 1))
-    print('| -------------------- step2: Done -------------------- |')
+    print('| -------------------- step2-3di2i: Done -------------------- |')
 
     print(f'time: {(time.time() - start_time)  :.3f} seconds')
 
