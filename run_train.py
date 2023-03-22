@@ -219,10 +219,6 @@ def setup_training_loop_kwargs(cfg):
     # ----------------------------------
 
     resume_specs = {
-        'celeba256_local': '/opt/data/private/senmao/StyleNeRF/pretrained/celeba_256.pkl',
-        'afhq256_local': '/opt/data/private/senmao/StyleNeRF/pretrained/afhq_256.pkl',
-        'ffhq256_local': '/opt/data/private/senmao/StyleNeRF/pretrained/ffhq_256.pkl',
-        'ffhq512_local': '/opt/data/private/senmao/StyleNeRF/pretrained/ffhq_512.pkl',
         'ffhq256':     'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/transfer-learning-source-nets/ffhq-res256-mirror-paper256-noaug.pkl',
         'ffhq512':     'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/transfer-learning-source-nets/ffhq-res512-mirror-stylegan2-noaug.pkl',
         'ffhq1024':    'https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/transfer-learning-source-nets/ffhq-res1024-mirror-stylegan2-noaug.pkl',

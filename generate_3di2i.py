@@ -1,4 +1,4 @@
-# Copyright (c) Computer school, NKU(Nankai University).
+
 
 """Generate images using pretrained stylenerf-3d23dt and adapted network pickle trained."""
 import math
@@ -87,7 +87,7 @@ def wvideo(img, name, outdir, grid_size):
 @click.option('--save_fnimg', help='if save fake_nerf_image and D_images', type=bool, required=True, default=False)
 # local images
 @click.option('--input-source', type=click.Choice(['real', 'generated']), help='where the input images come from?', default='generated')
-@click.option('--indir', help='directory of input images', type=str, required=True, metavar='DIR', default='/opt/data/private/senmao/data/afhq/val/cat')
+@click.option('--indir', help='directory of input images', type=str, required=True, metavar='DIR', default='/opt/data/private/customer/data/afhq/val/cat')
 @click.option('--img_res', help='image resolution', type=int, required=True, default=256)
 # step2
 @click.option('--step2', help='if use step2 to translate images', type=bool, required=True, default=True)

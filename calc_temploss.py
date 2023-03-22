@@ -130,7 +130,7 @@ if __name__ != '__main__':
     # parameters
     parser = argparse.ArgumentParser()
     parser.add_argument('--datasets', type=str, default='afhq', help='Image datasets: afhq, celeba-hq')
-    parser.add_argument('--img_path', type=str, default='/opt/data/private/senmao/StyleNeRF-2MappingNetwork-CCPL/results/afhq/', help='Image path')
+    parser.add_argument('--img_path', type=str, default='/opt/data/private/customer/StyleNeRF-2MappingNetwork-CCPL/results/afhq/', help='Image path')
     parser.add_argument('--intervals', type=ast.literal_eval, default='[1,2,4,8,16]', help='frame interval')
     # calculate lpips
     parser.add_argument('--calc_lpips', type=bool, default=False, help='calculate lpips')
@@ -265,7 +265,7 @@ if __name__ == '__main__':
     # parameters
     parser = argparse.ArgumentParser()
     parser.add_argument('--datasets', type=str, default='afhq', help='Image datasets: afhq, celeba-hq')
-    parser.add_argument('--img_path', type=str, default='/opt/data/private/senmao/StyleNeRF-2MappingNetwork-CCPL/results/afhq/', help='Image path')
+    parser.add_argument('--img_path', type=str, default='/opt/data/private/customer/StyleNeRF-2MappingNetwork-CCPL/results/afhq/', help='Image path')
     parser.add_argument('--intervals', type=ast.literal_eval, default='[1,2,4]', help='frame interval')
     # calculate lpips
     parser.add_argument('--calc_lpips', type=bool, default=False, help='calculate lpips')
