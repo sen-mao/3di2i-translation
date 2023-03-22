@@ -485,7 +485,7 @@ class AdaptedLoss(Loss):
         if self.relative_loss:
             losses['loss_ccpl'] = self.CCPL(gen['x_nerf'], fake_x_nerf, is_feature=True)
             adapted_imgs, adapted_xs = self.run_G_adapted(ws_nerf=gen_ws_nerf, ws=gen_ws, fake_x_nerf=fake_x_nerf, num_gpus=num_gpus)
-            for i in range(3):
+            for i in range(len(adapted_xs)):
                 x, img, ada_x, ada_img = gen['xs'][i], gen['imgs'][i], adapted_xs[i], adapted_imgs[i]
                 losses['loss_ccpl'] += self.CCPL(x, ada_x, is_feature=True)
 
@@ -495,7 +495,7 @@ class AdaptedLoss(Loss):
         if self.Gximg:
             if self.relative_loss is False: adapted_imgs, adapted_xs = self.run_G_adapted(ws_nerf=gen_ws_nerf, ws=gen_ws, fake_x_nerf=fake_x_nerf, num_gpus=num_gpus)
             losses['loss_Gximg'] = 0
-            for i in range(3):
+            for i in range(len(adapted_xs)):
                 x, img, ada_x, ada_img = gen['xs'][i], gen['imgs'][i], adapted_xs[i], adapted_imgs[i]
                 losses['loss_Gximg'] += self.criterionAdapted(ada_x, x)
                 losses['loss_Gximg'] += self.criterionAdapted(self.norm(ada_img), self.norm(img))
