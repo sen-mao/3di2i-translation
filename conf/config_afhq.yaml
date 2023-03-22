@@ -17,7 +17,7 @@ num_fp16_res: 4
 auto: False
 
 # dataset
-data: '/opt/data/private/senmao/datasets/afhq3c_labels.zip'
+data: '/datasets/afhq3c_labels.zip'
 resolution: ~
 cond: True
 subset: ~   # Train with only N images: <int>, default = all
