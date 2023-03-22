@@ -3,7 +3,7 @@
 name: paper1024
 ref_gpus: 8
 kimg: 25000
-mb: 32
+mb: 64
 mbstd: 4
 fmaps: 1
 lrate: 0.002
@@ -12,3 +12,6 @@ gamma: 2
 ema: 10
 ramp: ~
 map: 8
+#
+lrate_adapted: 0.0002
+beta1: 0.5
