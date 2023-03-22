@@ -229,12 +229,12 @@ def training_loop(
 
         if not os.path.exists(os.path.join(img_dir, 'reals.png')):
             save_image_grid(images, os.path.join(img_dir, 'reals.png'), drange=[0,255], grid_size=grid_size)
-        '''
+
         if not os.path.exists( os.path.join(img_dir, 'fakes_init.png')):
             with torch.no_grad():
                 images = torch.cat([G_ema.get_final_output(z=z, c=c, noise_mode='const', img=img).cpu() for z, c, img in zip(grid_z, grid_c, grid_i)]).numpy()
             save_image_grid(images, os.path.join(img_dir, 'fakes_init.png'), drange=[-1,1], grid_size=grid_size)
-        '''
+
 
     # Initialize logs.
     if rank == 0:
