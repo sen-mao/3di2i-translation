@@ -17,7 +17,7 @@ num_fp16_res: 4
 auto: False
 
 # dataset
-data: '/opt/data/private/senmao/datasets/afhq3c_labels.zip'
+data: '/datasets/afhq3c_labels.zip'
 resolution: ~
 cond: True
 label_dim: ~
@@ -35,7 +35,7 @@ resume: ~
 freezed: 1000
 
 # vgg pretrained model
-vgg: '/opt/data/private/senmao/StyleNeRF-2MappingNetwork-CCPL/pretrained/vgg_normalised.pth'
+vgg: './pretrained/vgg_normalised.pth'
 
 # performance options
 fp32: False
