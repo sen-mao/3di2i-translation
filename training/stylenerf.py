@@ -1184,7 +1184,8 @@ class Upsampler(object):
     def build_network(self, w_dim, input_dim, **block_kwargs):
         upsamplers = []
         if len(self.block_resolutions) > 0:  # nerf resolution smaller than image
-            channel_base       = int(self.channel_base * 32768) if self.channel_base_sz is None else self.channel_base_sz  # todo: channel_base=32768 ?
+            f = 2 if self.out_res == 1024 else 1
+            channel_base       = int(self.channel_base * 32768 * f) if self.channel_base_sz is None else self.channel_base_sz  # todo: channel_base=32768 ?
             fp16_resolution    = self.block_resolutions[0] * 2 # do not use fp16 for the first block
 
             if self.channel_dict is None:
@@ -1737,7 +1738,8 @@ class NeRFSynthesisNetwork(torch.nn.Module):
         n_levels, end_l, _, target_res = self.get_current_resolution()
 
         # ws = (ws_nerf+ws) * 0.5
-        ws = (ws_nerf[:,:ws.shape[1],:] + ws) * 0.5
+        # ws = (ws_nerf[:,:ws.shape[1],:] + ws) * 0.5
+        ws = (ws_nerf[:,1,:].unsqueeze(1).repeat([1, ws.shape[1], 1]) + ws) * 0.5
 
         # cameras, background codes        
         if "camera_matrices" not in block_kwargs:
@@ -1967,7 +1969,8 @@ class NeRFSynthesisNetwork(torch.nn.Module):
         block_kwargs['fake_x_nerf'] = fake_x_nerf
 
         # todo: ws = (ws_nerf+ws) * 0.5
-        ws = (ws_nerf[:, :ws.shape[1], :] + ws) * 0.5
+        # ws = (ws_nerf[:, :ws.shape[1], :] + ws) * 0.5
+        ws = (ws_nerf[:, 1, :].unsqueeze(1).repeat([1, ws.shape[1], 1]) + ws) * 0.5
 
         # ------------------- #
         '''
