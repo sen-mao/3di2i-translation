@@ -104,6 +104,8 @@ python generate_3d23dt.py  --network="{'step1': './pretrained/celebalabels_256.p
                            --save_3dvideo 0 --batch_idx 12 --save_3dframes 1 --save_sgl_3dvideo 1 --save_sglframes 1 --class 1
 ```
 
+Pretrained model: [AFHQ](https://drive.google.com/drive/folders/1QYidSxX5dh6K1ESkPhYcmlaJOthYO2mh?usp=sharing), [Celeba-HQ](https://drive.google.com/drive/folders/1eWr58Ypdf8gJ8QPg7j70P2-kKzSvFJSJ?usp=sharing)
+
 ## Metrics
 
 **calculate fid and lpips of 3D-aware I2I translation model.**
