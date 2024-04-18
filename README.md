@@ -1,5 +1,8 @@
 # 3DI2I: 3D-Aware Multi-Class Image-to-Image Translation with NeRFs</sub>
 
+[![arXiv](https://img.shields.io/badge/arXiv-3DI2I-<COLOR>.svg)](https://arxiv.org/abs/2303.15012) [![arXiv](https://img.shields.io/badge/paper-3DI2I-b31b1b.svg)](https://arxiv.org/pdf/2303.15012.pdf) [![YouTube Channel Views](https://img.shields.io/youtube/views/CjBPP2l9Bjg?style=social&label=YouTube)](https://www.youtube.com/watch?v=CjBPP2l9Bjg)
+
+
 ![Random Sample](./docs/random_sample.png)
 
 **3DI2I: 3D-Aware Multi-Class Image-to-Image Translation with NeRFs**<br>
